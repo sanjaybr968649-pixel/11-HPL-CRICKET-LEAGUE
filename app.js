@@ -1,5 +1,8 @@
 import { db } from "./firebase-config.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const app = document.getElementById("app");
@@ -7,53 +10,39 @@ document.addEventListener("DOMContentLoaded", async () => {
   app.innerHTML = `
     <div class="container">
       <h1>HPL Season 11</h1>
-      <p>HAND CRICKET PREMIER LEAGUE</p>
-      <h2>Matches</h2>
-      <div id="matches">Loading matches...</div>
+      <h2>Firebase Test</h2>
+      <p id="status">Checking Match 1...</p>
+      <div id="data"></div>
     </div>
   `;
 
   try {
-    const snapshot = await getDocs(collection(db, "matches"));
+    const ref = doc(db, "matches", "match1");
+    const snap = await getDoc(ref);
 
-    if (snapshot.empty) {
-      document.getElementById("matches").innerHTML =
-        "<p>No matches found.</p>";
+    if (!snap.exists()) {
+      document.getElementById("status").textContent =
+        "Match 1 NOT FOUND";
       return;
     }
 
-    const matches = [];
+    const match = snap.data();
 
-    snapshot.forEach((doc) => {
-      matches.push(doc.data());
-    });
+    document.getElementById("status").textContent =
+      "Match 1 FOUND ✅";
 
-    matches.sort((a, b) =>
-      Number(a.matchNo || 0) - Number(b.matchNo || 0)
-    );
-
-    document.getElementById("matches").innerHTML = matches.map(match => `
+    document.getElementById("data").innerHTML = `
       <div class="match-card">
         <h3>Match ${match.matchNo}</h3>
-        <div class="teams">
-          <strong>${match.team1}</strong>
-          <span>${match.score1}</span>
-        </div>
-        <div class="teams">
-          <strong>${match.team2}</strong>
-          <span>${match.score2}</span>
-        </div>
-        <p class="result">${match.result}</p>
+        <p>${match.team1} ${match.score1}</p>
+        <p>${match.team2} ${match.score2}</p>
+        <p>${match.result}</p>
         <p>📍 ${match.ground}</p>
       </div>
-    `).join("");
+    `;
 
   } catch (error) {
-    console.error("Firebase error:", error);
-
-    document.getElementById("matches").innerHTML = `
-      <p>Unable to load matches.</p>
-      <small>${error.message}</small>
-    `;
+    document.getElementById("status").textContent =
+      "Firebase Error: " + error.message;
   }
 });

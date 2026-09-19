@@ -3,9 +3,9 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/12.2.1/firebase
 
 const firebaseConfig = {
   apiKey: "AIzaSyDsvWDbT7GlvtWtoR8o4N-jLEP4rC8oGcA",
-  authDomain: "hand-cricket-primier-league.firebaseapp.com",
-  projectId: "hand-cricket-primier-league",
-  storageBucket: "hand-cricket-primier-league.firebasestorage.app",
+  authDomain: "hand-cricket-premier-league.firebaseapp.com",
+  projectId: "hand-cricket-premier-league",
+  storageBucket: "hand-cricket-premier-league.firebasestorage.app",
   messagingSenderId: "270593215152",
   appId: "1:270593215152:web:7502fb60432042b6258975",
   measurementId: "G-9S1WS03TBH"

@@ -1,3 +1,4 @@
+import { db } from "./firebase-config.js";
 // HPL Season 11 - public website
 // Loads local data.json and fills common season sections.
 document.addEventListener('DOMContentLoaded', async () => {

@@ -1,11 +1,17 @@
-// Paste the EXACT config from your NEW Firebase Web App here.
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyDW1MP5MBKoz6oOHxeWWHF7Ed8UGlsJsQ8",
+  authDomain: "hpl-cricket-league.firebaseapp.com",
+  projectId: "hpl-cricket-league",
+  storageBucket: "hpl-cricket-league.firebasestorage.app",
+  messagingSenderId: "310274398112",
+  appId: "1:310274398112:web:4122ce31fb352d4f05b6c5",
+  measurementId: "G-PPMME44H28"
 };
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db };
